@@ -12,6 +12,9 @@ namespace Liip\ThemeBundle\Tests\CacheWarmer;
 
 use Liip\ThemeBundle\CacheWarmer\TemplateFinder;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateFilenameParser;
+use function array_values;
+use function count;
+use function realpath;
 
 /**
  * TemplateFinderTest.

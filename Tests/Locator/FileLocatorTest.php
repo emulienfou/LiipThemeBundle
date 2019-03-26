@@ -14,6 +14,10 @@ namespace Liip\ThemeBundle\Tests\Locator;
 use Liip\ThemeBundle\ActiveTheme;
 use Liip\ThemeBundle\Helper\DeviceDetection;
 use Liip\ThemeBundle\Locator\FileLocator;
+use function array_unshift;
+use function debug_backtrace;
+use function strtr;
+use function substr;
 
 class FileLocatorFake extends FileLocator
 {

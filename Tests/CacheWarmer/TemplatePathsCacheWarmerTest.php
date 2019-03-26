@@ -11,6 +11,10 @@
 namespace Liip\ThemeBundle\Tests\CacheWarmer;
 
 use Liip\ThemeBundle\CacheWarmer\TemplatePathsCacheWarmer;
+use function array_keys;
+use function array_values;
+use function count;
+use function unlink;
 
 /**
  * TemplatePathsCacheWarmerTest.

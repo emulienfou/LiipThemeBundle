@@ -12,6 +12,9 @@
 namespace Liip\ThemeBundle;
 
 use Liip\ThemeBundle\Helper\DeviceDetectionInterface;
+use function implode;
+use function in_array;
+use function sprintf;
 
 /**
  * Contains the currently active theme and allows to change it.

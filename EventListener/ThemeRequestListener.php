@@ -17,6 +17,8 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Liip\ThemeBundle\Helper\DeviceDetectionInterface;
 use Liip\ThemeBundle\ActiveTheme;
+use function in_array;
+use function time;
 
 /**
  * Listens to the request and changes the active theme based on a cookie.

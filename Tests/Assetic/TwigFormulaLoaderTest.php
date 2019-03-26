@@ -13,6 +13,7 @@ namespace Liip\ThemeBundle\Tests\Assetic;
 
 use Liip\ThemeBundle\Assetic\TwigFormulaLoader;
 use Prophecy\Argument;
+use function class_exists;
 
 class TwigFormulaLoaderTest extends \PHPUnit\Framework\TestCase
 {

@@ -12,6 +12,7 @@
 namespace Liip\ThemeBundle\Tests\Helper;
 
 use Liip\ThemeBundle\Helper\DeviceDetection;
+use function class_exists;
 
 class DeviceDetectionTest extends \PHPUnit\Framework\TestCase
 {

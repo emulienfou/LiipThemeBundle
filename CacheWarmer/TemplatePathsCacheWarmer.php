@@ -11,11 +11,14 @@
 
 namespace Liip\ThemeBundle\CacheWarmer;
 
+use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer as BaseTemplatePathsCacheWarmer;
 use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator;
 use Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinderInterface;
 use Liip\ThemeBundle\ActiveTheme;
 use Symfony\Component\Templating\TemplateReferenceInterface;
+use function sprintf;
+use function var_export;
 
 class TemplatePathsCacheWarmer extends BaseTemplatePathsCacheWarmer
 {
@@ -64,7 +67,7 @@ class TemplatePathsCacheWarmer extends BaseTemplatePathsCacheWarmer
             foreach ($allTemplates as $template) {
                 try {
                     $templates[$template->getLogicalName().'|'.$theme] = $locator->locate($template->getPath());
-                } catch (\InvalidArgumentException $e) {
+                } catch (InvalidArgumentException $e) {
                 }
             }
         }

@@ -12,6 +12,8 @@
 
 namespace Liip\ThemeBundle\Tests\EventListener;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Liip\ThemeBundle\EventListener\ThemeRequestListener;
 use Liip\ThemeBundle\Controller\ThemeController;
@@ -43,9 +45,9 @@ class UseCaseTest extends \PHPUnit\Framework\TestCase
     /**
      * Get the mock of the GetResponseEvent and FilterResponseEvent.
      *
-     * @param \Symfony\Component\HttpFoundation\Request       $request
-     * @param null|\Symfony\Component\HttpFoundation\Response $response
-     * @param string                                          $type     could be Symfony\Component\HttpKernel\Event\GetResponseEvent or 'Symfony\Component\HttpKernel\Event\FilterResponseEvent'
+     * @param Request $request
+     * @param null|Response                             $response
+     * @param string                                    $type     could be Symfony\Component\HttpKernel\Event\GetResponseEvent or 'Symfony\Component\HttpKernel\Event\FilterResponseEvent'
      *
      * @return mixed
      */
@@ -126,8 +128,8 @@ class UseCaseTest extends \PHPUnit\Framework\TestCase
         if ($config['autodetect_theme']) {
             $device = $this->getDeviceDetectionMock('autodetect');
         }
-        $response = new \Symfony\Component\HttpFoundation\Response();
-        $request = new \Symfony\Component\HttpFoundation\Request();
+        $response = new Response();
+        $request = new Request();
 
         if ($hasAlreadyACookie) {
             $request = $this->getMockRequest('cookie');

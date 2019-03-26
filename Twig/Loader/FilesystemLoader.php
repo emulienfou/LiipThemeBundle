@@ -2,12 +2,14 @@
 
 namespace Liip\ThemeBundle\Twig\Loader;
 
+use Exception;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 use Liip\ThemeBundle\ActiveTheme;
 use Twig\Error\LoaderError as TwigLoaderError;
 use Twig\Loader\FilesystemLoader as TwigFilesystemLoader;
+use function sprintf;
 
 class FilesystemLoader extends TwigFilesystemLoader
 {
@@ -78,7 +80,7 @@ class FilesystemLoader extends TwigFilesystemLoader
         try {
             $templateReference = $this->parser->parse($template);
             $file = $this->locator->locate($templateReference);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $previous = $e;
 
             // for BC

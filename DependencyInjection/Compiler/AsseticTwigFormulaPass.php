@@ -15,6 +15,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 use Symfony\Component\DependencyInjection\Reference;
+use function array_key_exists;
+use function count;
+use function is_array;
 
 /**
  * This pass replaces the assetic twig formula loader.

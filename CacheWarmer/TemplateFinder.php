@@ -16,6 +16,8 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\Finder\Finder;
+use function array_merge;
+use function is_dir;
 
 /**
  * Finds all templates, including themes.

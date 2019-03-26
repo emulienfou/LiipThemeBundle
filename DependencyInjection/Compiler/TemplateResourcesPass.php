@@ -11,10 +11,11 @@
 
 namespace Liip\ThemeBundle\DependencyInjection\Compiler;
 
+use ReflectionClass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Bundle\AsseticBundle\DependencyInjection\DirectoryResourceDefinition;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\Exception\LogicException;
+use function dirname;
 
 /**
  * This pass adds directory resources to scan for assetic assets.
@@ -35,7 +36,7 @@ class TemplateResourcesPass implements CompilerPassInterface
         $bundles = $container->getParameter('kernel.bundles');
         $asseticBundles = $container->getParameterBag()->resolveValue($container->getParameter('assetic.bundles'));
         foreach ($asseticBundles as $bundleName) {
-            $rc = new \ReflectionClass($bundles[$bundleName]);
+            $rc = new ReflectionClass($bundles[$bundleName]);
             foreach ($engines as $engine) {
                 $this->setBundleDirectoryResources($container, $engine, dirname($rc->getFileName()), $bundleName);
             }

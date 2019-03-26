@@ -11,6 +11,7 @@
 
 namespace Liip\ThemeBundle\Locator;
 
+use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator as BaseTemplateLocator;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
@@ -69,13 +70,13 @@ class TemplateLocator extends BaseTemplateLocator
      *
      * @return string The full path for the file
      *
-     * @throws \InvalidArgumentException When the template is not an instance of TemplateReferenceInterface
-     * @throws \InvalidArgumentException When the template file can not be found
+     * @throws InvalidArgumentException When the template is not an instance of TemplateReferenceInterface
+     * @throws InvalidArgumentException When the template file can not be found
      */
     public function locate($template, $currentPath = null, $first = true)
     {
         if (!$template instanceof TemplateReferenceInterface) {
-            throw new \InvalidArgumentException('The template must be an instance of TemplateReferenceInterface.');
+            throw new InvalidArgumentException('The template must be an instance of TemplateReferenceInterface.');
         }
 
         $key = $this->getCacheKey($template);
@@ -83,8 +84,8 @@ class TemplateLocator extends BaseTemplateLocator
         if (!isset($this->cache[$key])) {
             try {
                 $this->cache[$key] = $this->locator->locate($template->getPath(), $currentPath);
-            } catch (\InvalidArgumentException $e) {
-                throw new \InvalidArgumentException(sprintf('Unable to find template "%s" in "%s".', $template, $e->getMessage()), 0, $e);
+            } catch (InvalidArgumentException $e) {
+                throw new InvalidArgumentException(sprintf('Unable to find template "%s" in "%s".', $template, $e->getMessage()), 0, $e);
             }
         }
 

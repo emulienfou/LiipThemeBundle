@@ -2,8 +2,10 @@
 
 namespace Tests\Twig\Loader;
 
+use InvalidArgumentException;
 use Liip\ThemeBundle\ActiveTheme;
 use Liip\ThemeBundle\Twig\Loader\FilesystemLoader;
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
 
 class FilesystemLoaderTest extends \PHPUnit\Framework\TestCase
@@ -36,7 +38,7 @@ class FilesystemLoaderTest extends \PHPUnit\Framework\TestCase
         $locator
             ->expects($this->once())
             ->method('locate')
-            ->willThrowException(new \RuntimeException());
+            ->willThrowException(new RuntimeException());
 
         $loader = new FilesystemLoader($locator, $parser);
         $loader->addPath(__DIR__.'/Fixtures/Resources/views', 'namespace');
@@ -63,7 +65,7 @@ class FilesystemLoaderTest extends \PHPUnit\Framework\TestCase
         $locator
             ->expects($this->once())
             ->method('locate')
-            ->will($this->throwException(new \InvalidArgumentException('Unable to find template "NonExistent".')))
+            ->will($this->throwException(new InvalidArgumentException('Unable to find template "NonExistent".')))
         ;
 
         $loader = new FilesystemLoader($locator, $parser);

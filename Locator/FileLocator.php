@@ -11,9 +11,23 @@
 
 namespace Liip\ThemeBundle\Locator;
 
+use InvalidArgumentException;
+use RuntimeException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Config\FileLocator as BaseFileLocator;
 use Liip\ThemeBundle\ActiveTheme;
+use function array_filter;
+use function array_merge;
+use function array_merge_recursive;
+use function count;
+use function explode;
+use function file_exists;
+use function is_array;
+use function preg_match;
+use function strlen;
+use function strpos;
+use function strtr;
+use function substr;
 
 /**
  * FileLocator uses the HttpKernel FileLocator to locate resources in bundles
@@ -119,8 +133,8 @@ class FileLocator extends BaseFileLocator
      *
      * @return string|array The absolute path of the resource or an array if $first is false
      *
-     * @throws \InvalidArgumentException if the file cannot be found or the name is not valid
-     * @throws \RuntimeException         if the name contains invalid/unsafe characters
+     * @throws InvalidArgumentException if the file cannot be found or the name is not valid
+     * @throws RuntimeException         if the name contains invalid/unsafe characters
      */
     public function locate($name, $dir = null, $first = true)
     {
@@ -153,15 +167,15 @@ class FileLocator extends BaseFileLocator
      * @param string $dir
      * @param bool   $first
      *
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
+     * @throws RuntimeException
+     * @throws InvalidArgumentException
      *
      * @return string
      */
     protected function locateBundleResource($name, $dir = null, $first = true)
     {
         if (false !== strpos($name, '..')) {
-            throw new \RuntimeException(sprintf('File name "%s" contains invalid characters (..).', $name));
+            throw new RuntimeException(sprintf('File name "%s" contains invalid characters (..).', $name));
         }
 
         $bundleName = substr($name, 1);
@@ -178,7 +192,7 @@ class FileLocator extends BaseFileLocator
         }
 
         if (0 !== strpos($path, 'Resources')) {
-            throw new \RuntimeException('Template files have to be in Resources.');
+            throw new RuntimeException('Template files have to be in Resources.');
         }
 
         $resourceBundle = null;
@@ -209,7 +223,7 @@ class FileLocator extends BaseFileLocator
             foreach ($checkPaths as $checkPath) {
                 if (file_exists($checkPath)) {
                     if (null !== $resourceBundle) {
-                        throw new \RuntimeException(sprintf('"%s" resource is hidden by a resource from the "%s" derived bundle. Create a "%s" file to override the bundle resource.',
+                        throw new RuntimeException(sprintf('"%s" resource is hidden by a resource from the "%s" derived bundle. Create a "%s" file to override the bundle resource.',
                             $path,
                             $resourceBundle,
                             $checkPath
@@ -237,7 +251,7 @@ class FileLocator extends BaseFileLocator
             return $first ? $files[0] : $files;
         }
 
-        throw new \InvalidArgumentException(sprintf('Unable to find file "%s".', $name));
+        throw new InvalidArgumentException(sprintf('Unable to find file "%s".', $name));
     }
 
     /**
@@ -252,7 +266,7 @@ class FileLocator extends BaseFileLocator
     protected function locateAppResource($name, $dir = null, $first = true)
     {
         if (false !== strpos($name, '..')) {
-            throw new \RuntimeException(sprintf('File name "%s" contains invalid characters (..).', $name));
+            throw new RuntimeException(sprintf('File name "%s" contains invalid characters (..).', $name));
         }
 
         $files = array();

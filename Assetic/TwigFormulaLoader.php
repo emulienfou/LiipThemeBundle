@@ -12,11 +12,14 @@
 namespace Liip\ThemeBundle\Assetic;
 
 use Assetic\Factory\Resource\ResourceInterface;
+use Exception;
 use Psr\Log\LoggerInterface;
 use Liip\ThemeBundle\ActiveTheme;
 use Assetic\Extension\Twig\TwigFormulaLoader as BaseTwigFormulaLoader;
 use Twig\Environment as TwigEnvironment;
 use Twig\Source as TwigSource;
+use function class_exists;
+use function sprintf;
 
 /**
  * Extends the base twig formula loader but iterates over all the
@@ -70,7 +73,7 @@ class TwigFormulaLoader extends BaseTwigFormulaLoader
                 // delegate the formula loading to the parent
                 $formulae += parent::load($resource);
                 $successTemplates[(string) $resource] = true;
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $failureTemplates[(string) $resource] = $e->getMessage();
             }
         }

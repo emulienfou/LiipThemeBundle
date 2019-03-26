@@ -11,6 +11,13 @@
 
 namespace Liip\ThemeBundle\Helper;
 
+use function array_keys;
+use function preg_match;
+use function strtolower;
+use function substr;
+use function trigger_error;
+use function ucfirst;
+
 class DeviceDetection implements DeviceDetectionInterface
 {
     protected $userAgent;
@@ -89,7 +96,7 @@ class DeviceDetection implements DeviceDetectionInterface
                 $this->init();
                 $device = $this->device;
             } else {
-                list($device, $type) = $this->determineDevice($arguments['userAgent']);
+                list($device,) = $this->determineDevice($arguments['userAgent']);
             }
         }
 
@@ -109,7 +116,7 @@ class DeviceDetection implements DeviceDetectionInterface
             $this->init();
             $type = $this->type;
         } else {
-            list($device, $type) = $this->determineDevice($userAgent);
+            list(, $type) = $this->determineDevice($userAgent);
         }
 
         return $type === 'phone';
@@ -128,7 +135,7 @@ class DeviceDetection implements DeviceDetectionInterface
             $this->init();
             $type = $this->type;
         } else {
-            list($device, $type) = $this->determineDevice($userAgent);
+            list(, $type) = $this->determineDevice($userAgent);
         }
 
         return $type === 'tablet';
@@ -147,7 +154,7 @@ class DeviceDetection implements DeviceDetectionInterface
             $this->init();
             $type = $this->type;
         } else {
-            list($device, $type) = $this->determineDevice($userAgent);
+            list(, $type) = $this->determineDevice($userAgent);
         }
 
         return $type === 'desktop';
