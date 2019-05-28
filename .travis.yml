@@ -27,8 +27,6 @@ matrix:
     - php: 7.2
       env: SYMFONY_VERSION=4.2.*;ASSETIC=skip
     - php: 7.2
-      env: SYMFONY_VERSION=4.3.*;ASSETIC=skip
-    - php: 7.2
       env: SYMFONY_VERSION=@dev;ASSETIC=skip
     - php: 7.3
       env: SYMFONY_VERSION=3.3.*
@@ -38,8 +36,6 @@ matrix:
       env: SYMFONY_VERSION=4.1.*;ASSETIC=skip
     - php: 7.3
       env: SYMFONY_VERSION=4.2.*;ASSETIC=skip
-    - php: 7.3
-      env: SYMFONY_VERSION=4.3.*;ASSETIC=skip
     - php: 7.3
       env: SYMFONY_VERSION=@dev;ASSETIC=skip
     - php: 7.0
